@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Missions {
   String missionId;
   String companyId;
-  String img;
+  String coverImg;
   String difficulty;
   int microtasksNos;
   String name;
@@ -12,7 +12,7 @@ class Missions {
   Missions({
     this.missionId,
     this.companyId,
-    this.img,
+    this.coverImg,
     this.difficulty,
     this.microtasksNos,
     this.name,
@@ -24,10 +24,10 @@ class Missions {
     final db = Firestore.instance;
     final response = await db.collection('missions').add(missions.toMap());
     missions.missionId = response.documentID;
-    await db.collection('missions').document(missions.missionId).setData(
-      {'missionId': missions.missionId},
-      merge: true,
-    );
+    // await db.collection('missions').document(missions.missionId).setData(
+    //   {'missionId': missions.missionId},
+    //   merge: true,
+    // );
     addDetail(missions, db);
   }
 
@@ -42,9 +42,9 @@ class Missions {
 
   Map<String, dynamic> toMap() {
     return {
-      'missionId': missionId,
+      //'missionId': missionId,
       'companyId': companyId,
-      'img': img,
+      'coverImg': coverImg,
       'difficulty': difficulty,
       'microtasksNos': microtasksNos,
       'name': name,
@@ -57,9 +57,9 @@ class Missions {
     if (map == null) return null;
 
     return Missions(
-      missionId: map['missionId'],
+      //missionId: map['missionId'],
       companyId: map['companyId'],
-      img: map['img'],
+      coverImg: map['coverImg'],
       difficulty: map['difficulty'],
       microtasksNos: map['microtasksNos'],
       name: map['name'],

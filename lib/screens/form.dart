@@ -31,7 +31,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: value,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: mission.difficulty,
                     microtasksNos: mission.microtasksNos,
                     name: mission.name,
@@ -46,7 +46,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: value,
+                    coverImg: value,
                     difficulty: mission.difficulty,
                     microtasksNos: mission.microtasksNos,
                     name: mission.name,
@@ -61,7 +61,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: value,
                     microtasksNos: mission.microtasksNos,
                     name: mission.name,
@@ -76,7 +76,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: mission.difficulty,
                     microtasksNos: int.parse(value),
                     name: mission.name,
@@ -91,7 +91,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: mission.difficulty,
                     microtasksNos: mission.microtasksNos,
                     name: value,
@@ -113,7 +113,7 @@ class FormScreen extends StatelessWidget {
                   });
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: mission.difficulty,
                     microtasksNos: mission.microtasksNos,
                     name: mission.name,
@@ -130,7 +130,7 @@ class FormScreen extends StatelessWidget {
                 onSaved: (value) {
                   mission = Missions(
                     companyId: mission.companyId,
-                    img: mission.img,
+                    coverImg: mission.coverImg,
                     difficulty: mission.difficulty,
                     microtasksNos: mission.microtasksNos,
                     name: mission.name,
