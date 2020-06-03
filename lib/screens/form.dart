@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:core';
 
 import 'package:forms/models/mission.dart';
+import 'package:forms/models/providers/mission_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'microtasks.dart';
 
 class FormScreen extends StatelessWidget {
   var mission = Missions();
   final _formKey = GlobalKey<FormState>();
-  Future<void> _save() async {
+  Future<void> _save(BuildContext context) async {
     _formKey.currentState.save();
-    await mission.createMission(mission);
+    await Provider.of<MissionProvider>(context,listen: false).createMission(mission);
     _formKey.currentState.reset();
   }
 
@@ -144,7 +146,7 @@ class FormScreen extends StatelessWidget {
               // ),
               RaisedButton(
                 onPressed: () async {
-                  await _save();
+                  await _save(context);
                   return showDialog(
                     context: context,
                     builder: (BuildContext context) {

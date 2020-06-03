@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:forms/models/microtask.dart';
+import 'package:forms/models/providers/microtask_provider.dart';
+import 'package:provider/provider.dart';
 
 class Microtasks extends StatelessWidget {
   final String id;
   Microtasks(this.id);
   var micro = Microtask();
   final _formKey = GlobalKey<FormState>();
-  Future<void> _save() async {
+  Future<void> _save(BuildContext context) async {
       _formKey.currentState.save();
-    await micro.createMicrotask(micro, id);
+    await Provider.of<MicroTaskProvider>(context,listen: false).createMicrotask(micro, id);
     _formKey.currentState.reset();
   }
 
@@ -118,13 +120,13 @@ class Microtasks extends StatelessWidget {
                 children: [
                   RaisedButton(
                     child: Text("ADD Another microtask"),
-                    onPressed: () async => await _save(),
+                    onPressed: () async => await _save(context),
                   ),
                   SizedBox(width: 20,),
                   RaisedButton(
                     child: Text("DONE!!"),
                     onPressed: () async {
-                      await _save();
+                      await _save(context);
                       Navigator.of(context).pop();
                     },
                   )

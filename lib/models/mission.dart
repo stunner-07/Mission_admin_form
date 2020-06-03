@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Missions {
   String missionId;
   String companyId;
@@ -19,27 +17,6 @@ class Missions {
     this.tags,
     this.details,
   });
-
-  Future<void> createMission(Missions missions) async {
-    final db = Firestore.instance;
-    final response = await db.collection('missions').add(missions.toMap());
-    missions.missionId = response.documentID;
-    // await db.collection('missions').document(missions.missionId).setData(
-    //   {'missionId': missions.missionId},
-    //   merge: true,
-    // );
-    addDetail(missions, db);
-  }
-
-  Future<void> addDetail(Missions missions, Firestore db) async {
-    await db
-        .collection('missions')
-        .document(missions.missionId)
-        .collection('details')
-        .document('details')
-        .setData({'details': missions.details});
-  }
-
   Map<String, dynamic> toMap() {
     return {
       //'missionId': missionId,
