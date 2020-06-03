@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:forms/models/microtask.dart';
 import 'package:forms/models/providers/microtask_provider.dart';
+import 'package:forms/models/providers/mission_provider.dart';
 import 'package:provider/provider.dart';
 
-class Microtasks extends StatelessWidget {
-  final String id;
-  Microtasks(this.id);
+class MicrotaskScreen extends StatelessWidget {
+  static const routeName = '/microtask';
+  //MicrotaskScreen(this.id);
   var micro = Microtask();
   final _formKey = GlobalKey<FormState>();
-  Future<void> _save(BuildContext context) async {
+  Future<void> _save(BuildContext context,String id) async {
       _formKey.currentState.save();
     await Provider.of<MicroTaskProvider>(context,listen: false).createMicrotask(micro, id);
     _formKey.currentState.reset();
@@ -16,6 +17,7 @@ class Microtasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String id=Provider.of<MissionProvider>(context,listen: false).id;
     return Scaffold(
       body: Container(
         width: 500,
@@ -120,13 +122,13 @@ class Microtasks extends StatelessWidget {
                 children: [
                   RaisedButton(
                     child: Text("ADD Another microtask"),
-                    onPressed: () async => await _save(context),
+                    onPressed: () async => await _save(context,id),
                   ),
                   SizedBox(width: 20,),
                   RaisedButton(
                     child: Text("DONE!!"),
                     onPressed: () async {
-                      await _save(context);
+                      await _save(context,id);
                       Navigator.of(context).pop();
                     },
                   )

@@ -147,23 +147,24 @@ class FormScreen extends StatelessWidget {
               RaisedButton(
                 onPressed: () async {
                   await _save(context);
-                  return showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: Container(
-                          width: 800,
-                          height: 800,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Microtasks(mission.missionId),
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                  // return showDialog(
+                  //   context: context,
+                  //   builder: (BuildContext context) {
+                  //     return Dialog(
+                  //       shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(20.0)),
+                  //       child: Container(
+                  //         width: 800,
+                  //         height: 800,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.all(12.0),
+                  //           child: MicrotaskScreen(mission.missionId),
+                  //         ),
+                  //       ),
+                  //     );
+                  //   },
+                  // );
+                  Navigator.of(context).pushNamed(MicrotaskScreen.routeName);
                 },
                 child: Text('Create Mission AND add microtask'),
               ),

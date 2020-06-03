@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../microtask.dart';
 
 class MicroTaskProvider extends ChangeNotifier{
+  String id;
   Future<int> countDocuments(String id) async {
     QuerySnapshot _myDoc = await Firestore.instance.collection('missions')
         .document(id)

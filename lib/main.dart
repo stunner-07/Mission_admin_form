@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forms/models/providers/microtask_provider.dart';
 import 'package:forms/models/providers/mission_provider.dart';
 import 'package:forms/screens/form.dart';
+import 'package:forms/screens/microtasks.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.blueAccent,
         ),
         home: FormScreen(),
+        routes: {
+          MicrotaskScreen.routeName:(ctx)=>MicrotaskScreen(),
+        },
       ),
     );
   }
