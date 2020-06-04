@@ -8,7 +8,7 @@ class Missions {
   String companyId;
   String coverImg;
   Difficulty difficulty;
-  int microtasksNos;
+  //int microtasksNos;
   String name;
   List<String> tags;
   String details;
@@ -17,7 +17,7 @@ class Missions {
     this.companyId,
     this.coverImg,
     this.difficulty,
-    this.microtasksNos,
+    //this.microtasksNos,
     this.name,
     this.tags,
     this.details,
@@ -39,7 +39,7 @@ class Missions {
       'companyId': companyId,
       'coverImg': coverImg,
       'difficulty': levelDiff,
-      'microtasksNos': microtasksNos,
+      //'microtasksNos': microtasksNos,
       'name': name,
       'tags': tags,
       //'details': details,

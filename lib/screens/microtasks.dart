@@ -51,7 +51,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   width: 500,
-                  height: 500,
+                  height: 450,
                   child: Form(
                     key: _formKey,
                     child: ListView(
@@ -67,7 +67,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               answer: value,
                               detail: micro.detail,
                               name: micro.name,
-                              progress: micro.progress,
+                              //progress: micro.progress,
                               question: micro.question,
                               resources: micro.resources,
                             );
@@ -84,7 +84,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               answer: micro.answer,
                               detail: value,
                               name: micro.name,
-                              progress: micro.progress,
+                              //progress: micro.progress,
                               question: micro.question,
                               resources: micro.resources,
                             );
@@ -100,30 +100,30 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               answer: micro.answer,
                               detail: micro.detail,
                               name: value,
-                              progress: micro.progress,
+                              //progress: micro.progress,
                               question: micro.question,
                               resources: micro.resources,
                             );
                           },
                         ),
                         _verticalSpacer,
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Progress"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            micro = Microtask(
-                              answer: micro.answer,
-                              detail: micro.detail,
-                              name: micro.name,
-                              progress: int.parse(value),
-                              question: micro.question,
-                              resources: micro.resources,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(),
+                        //       labelText: "Progress"),
+                        //   textInputAction: TextInputAction.next,
+                        //   onSaved: (value) {
+                        //     micro = Microtask(
+                        //       answer: micro.answer,
+                        //       detail: micro.detail,
+                        //       name: micro.name,
+                        //       //progress: int.parse(value),
+                        //       question: micro.question,
+                        //       resources: micro.resources,
+                        //     );
+                        //   },
+                        // ),
+                        // _verticalSpacer,
                         TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
@@ -134,7 +134,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               answer: micro.answer,
                               detail: micro.detail,
                               name: micro.name,
-                              progress: micro.progress,
+                              //progress: micro.progress,
                               question: value,
                               resources: micro.resources,
                             );
@@ -158,7 +158,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               answer: micro.answer,
                               detail: micro.detail,
                               name: micro.name,
-                              progress: micro.progress,
+                              //progress: micro.progress,
                               question: micro.question,
                               resources: lt,
                             );

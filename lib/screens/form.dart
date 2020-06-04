@@ -71,7 +71,7 @@ class _FormScreenState extends State<FormScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   width: 500,
-                  height: 600,
+                  height: 520,
                   child: Form(
                     key: _formKey,
                     child: ListView(
@@ -87,7 +87,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: value,
                               coverImg: mission.coverImg,
                               difficulty: mission.difficulty,
-                              microtasksNos: mission.microtasksNos,
+                              //microtasksNos: mission.microtasksNos,
                               name: mission.name,
                               tags: mission.tags,
                               details: mission.details,
@@ -105,7 +105,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: mission.companyId,
                               coverImg: value,
                               difficulty: mission.difficulty,
-                              microtasksNos: mission.microtasksNos,
+                              //microtasksNos: mission.microtasksNos,
                               name: mission.name,
                               tags: mission.tags,
                               details: mission.details,
@@ -124,7 +124,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: mission.companyId,
                               coverImg: mission.coverImg,
                               difficulty: value,
-                              microtasksNos: mission.microtasksNos,
+                             // microtasksNos: mission.microtasksNos,
                               name: mission.name,
                               tags: mission.tags,
                               details: mission.details,
@@ -169,24 +169,24 @@ class _FormScreenState extends State<FormScreen> {
                         //     );
                         //   },
                         // ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "No of Microtasks"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            mission = Missions(
-                              companyId: mission.companyId,
-                              coverImg: mission.coverImg,
-                              difficulty: mission.difficulty,
-                              microtasksNos: int.parse(value),
-                              name: mission.name,
-                              tags: mission.tags,
-                              details: mission.details,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(),
+                        //       labelText: "No of Microtasks"),
+                        //   textInputAction: TextInputAction.next,
+                        //   onSaved: (value) {
+                        //     mission = Missions(
+                        //       companyId: mission.companyId,
+                        //       coverImg: mission.coverImg,
+                        //       difficulty: mission.difficulty,
+                        //       //microtasksNos: int.parse(value),
+                        //       name: mission.name,
+                        //       tags: mission.tags,
+                        //       details: mission.details,
+                        //     );
+                        //   },
+                        // ),
+                        // _verticalSpacer,
                         TextFormField(
                           decoration: InputDecoration(
                               border: OutlineInputBorder(), labelText: "Name"),
@@ -196,7 +196,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: mission.companyId,
                               coverImg: mission.coverImg,
                               difficulty: mission.difficulty,
-                              microtasksNos: mission.microtasksNos,
+                              //microtasksNos: mission.microtasksNos,
                               name: value,
                               tags: mission.tags,
                               details: mission.details,
@@ -220,7 +220,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: mission.companyId,
                               coverImg: mission.coverImg,
                               difficulty: mission.difficulty,
-                              microtasksNos: mission.microtasksNos,
+                              //microtasksNos: mission.microtasksNos,
                               name: mission.name,
                               tags: lt,
                               details: mission.details,
@@ -240,7 +240,7 @@ class _FormScreenState extends State<FormScreen> {
                               companyId: mission.companyId,
                               coverImg: mission.coverImg,
                               difficulty: mission.difficulty,
-                              microtasksNos: mission.microtasksNos,
+                              //microtasksNos: mission.microtasksNos,
                               name: mission.name,
                               tags: mission.tags,
                               details: value,
@@ -274,7 +274,7 @@ class _FormScreenState extends State<FormScreen> {
                             // );
                           },
                           child: Text(
-                            'Create Mission and Add Microtask',
+                            'Add Microtasks',
                             style: TextStyle(
                               //fontWeight: FontWeight.bold,
                               color: Colors.white,

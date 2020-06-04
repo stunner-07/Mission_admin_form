@@ -2,14 +2,14 @@ class Microtask {
   String answer;
   String detail;
   String name;
-  int progress;
+ // int progress;
   String question;
   List<String> resources;
   Microtask({
     this.answer,
     this.detail,
     this.name,
-    this.progress,
+    //this.progress,
     this.question,
     this.resources,
   });
@@ -20,7 +20,7 @@ class Microtask {
       'answer': answer,
       'detail': detail,
       'name': name,
-      'progress': progress,
+      //'progress': progress,
       'question': question,
       'resources': resources,
     };
@@ -33,7 +33,7 @@ class Microtask {
       answer: map['answer'],
       detail: map['detail'],
       name: map['name'],
-      progress: map['progress'],
+      //progress: map['progress'],
       question: map['question'],
       resources: List<String>.from(map['resources']),
     );

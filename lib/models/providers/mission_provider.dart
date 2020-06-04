@@ -10,10 +10,6 @@ class MissionProvider extends ChangeNotifier{
     missions.missionId = response.documentID;
     id=missions.missionId;
     notifyListeners();
-    // await db.collection('missions').document(missions.missionId).setData(
-    //   {'missionId': missions.missionId},
-    //   merge: true,
-    // );
     addDetail(missions, db);
   }
 
