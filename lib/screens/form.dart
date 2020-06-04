@@ -1,3 +1,4 @@
+import 'package:dropdown_formfield/dropdown_formfield.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 
@@ -27,13 +28,26 @@ class _FormScreenState extends State<FormScreen> {
     });
     await Provider.of<MissionProvider>(context, listen: false)
         .createMission(mission);
-    
+
     // setState(() {
     //   isLoading = false;
     // });
     Navigator.of(context).pushNamed(MicrotaskScreen.routeName);
   }
-
+  var _level=Difficulty.Beginner;
+  // String get levelDiff{
+  // if(_level==Difficulty.Beginner){
+  //   return 'l1';
+  // }
+  // else if(_level==Difficulty.Intermediate){
+  //   return 'l2';
+  // }
+  // else if(_level==Difficulty.Advanced){
+  //   return 'l3';
+  // }
+  // else
+  // return '';
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,9 +100,10 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(labelText: "Difficulty"),
-                          textInputAction: TextInputAction.next,
+                        DropDownFormField(
+                          titleText: 'Difficulty',
+                          hintText: 'Please choose one',
+                          value:_level,
                           onSaved: (value) {
                             mission = Missions(
                               companyId: mission.companyId,
@@ -99,8 +114,48 @@ class _FormScreenState extends State<FormScreen> {
                               tags: mission.tags,
                               details: mission.details,
                             );
+                            setState(() {
+                              _level=value;
+                            });
                           },
+                          onChanged: (value){
+                            setState(() {
+                              _level=value;
+                            });
+                          },
+                          dataSource: [
+                            {
+                              "display": "Beginner",
+                              "value": Difficulty.Beginner,
+                            },
+                            {
+                              "display": "Intermediate",
+                              "value": Difficulty.Intermediate,
+                            },
+                            {
+                              "display": "Advanced",
+                              "value": Difficulty.Advanced,
+                            },
+                          ],
+                          textField: 'display',
+                          valueField: 'value',
                         ),
+
+                        // TextFormField(
+                        //   decoration: InputDecoration(labelText: "Difficulty"),
+                        //   textInputAction: TextInputAction.next,
+                        //   onSaved: (value) {
+                        //     mission = Missions(
+                        //       companyId: mission.companyId,
+                        //       coverImg: mission.coverImg,
+                        //       difficulty: value,
+                        //       microtasksNos: mission.microtasksNos,
+                        //       name: mission.name,
+                        //       tags: mission.tags,
+                        //       details: mission.details,
+                        //     );
+                        //   },
+                        // ),
                         TextFormField(
                           decoration:
                               InputDecoration(labelText: "No of Microtasks"),
