@@ -167,8 +167,15 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                         _verticalSpacer,
                         Row(
                           children: [
-                            RaisedButton(
-                              child: Text("ADD Another microtask"),
+                            FlatButton(
+                              color: Theme.of(context).accentColor,
+                              child: Text(
+                                "ADD Another microtask",
+                                style: TextStyle(
+                                  //fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                               onPressed: () async {
                                 await _save(context, id);
                                 setState(() {
@@ -180,8 +187,15 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             SizedBox(
                               width: 20,
                             ),
-                            RaisedButton(
-                              child: Text("DONE!!"),
+                            FlatButton(
+                              color: Theme.of(context).accentColor,
+                              child: Text(
+                                "DONE!!",
+                                style: TextStyle(
+                                  //fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
                               onPressed: () async {
                                 await _save(context, id);
                                 Navigator.of(context).pushReplacementNamed('/');

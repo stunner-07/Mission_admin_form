@@ -71,7 +71,7 @@ class _FormScreenState extends State<FormScreen> {
                 child: Container(
                   alignment: Alignment.center,
                   width: 500,
-                  height: 550,
+                  height: 600,
                   child: Form(
                     key: _formKey,
                     child: ListView(
@@ -251,7 +251,8 @@ class _FormScreenState extends State<FormScreen> {
                         // RaisedButton(
                         //   onPressed: () => _save(),
                         // ),
-                        RaisedButton(
+                        FlatButton(
+                          color: Theme.of(context).accentColor,
                           onPressed: () async {
                             await _save(context);
                             // return showDialog(
@@ -272,7 +273,13 @@ class _FormScreenState extends State<FormScreen> {
                             //   },
                             // );
                           },
-                          child: Text('Create Mission AND add microtask'),
+                          child: Text(
+                            'Create Mission and Add Microtask',
+                            style: TextStyle(
+                              //fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ],
                     ),
