@@ -30,6 +30,10 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
     // });
   }
 
+  final Widget _verticalSpacer = SizedBox(
+    height: 8.0,
+  );
+
   @override
   Widget build(BuildContext context) {
     final String id = Provider.of<MissionProvider>(context, listen: false).id;
@@ -48,13 +52,15 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                   alignment: Alignment.center,
                   width: 500,
                   height: 500,
-                  padding: const EdgeInsets.all(15),
                   child: Form(
                     key: _formKey,
                     child: ListView(
+                      padding: const EdgeInsets.all(16),
                       children: <Widget>[
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Answer"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Answer"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             micro = Microtask(
@@ -67,8 +73,11 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Details"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Details"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             micro = Microtask(
@@ -81,8 +90,10 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Name"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: "Name"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             micro = Microtask(
@@ -95,8 +106,11 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Progress"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Progress"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             micro = Microtask(
@@ -109,8 +123,11 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Question"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Question"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             micro = Microtask(
@@ -123,8 +140,11 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Resources"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Resources"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             var lt = new List<String>();
@@ -144,9 +164,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                             );
                           },
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        _verticalSpacer,
                         Row(
                           children: [
                             RaisedButton(
@@ -154,7 +172,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                               onPressed: () async {
                                 await _save(context, id);
                                 setState(() {
-                                  isLoading=false;
+                                  isLoading = false;
                                 });
                                 //_formKey.currentState.reset();
                               },

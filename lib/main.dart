@@ -23,12 +23,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Widhya',
         theme: ThemeData(
-          primarySwatch: Colors.grey,
-          accentColor: Colors.blueAccent,
+          primaryColor: Color(0xff8921aa),
+          accentColor: Color(0xff8921aa),
         ),
         home: FormScreen(),
         routes: {
-          MicrotaskScreen.routeName:(ctx)=>MicrotaskScreen(),
+          MicrotaskScreen.routeName: (ctx) => MicrotaskScreen(),
         },
       ),
     );

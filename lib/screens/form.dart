@@ -34,7 +34,9 @@ class _FormScreenState extends State<FormScreen> {
     // });
     Navigator.of(context).pushNamed(MicrotaskScreen.routeName);
   }
-  var _level=Difficulty.Beginner;
+
+  var _level = Difficulty.Beginner;
+
   // String get levelDiff{
   // if(_level==Difficulty.Beginner){
   //   return 'l1';
@@ -48,6 +50,11 @@ class _FormScreenState extends State<FormScreen> {
   // else
   // return '';
   // }
+
+  final Widget _verticalSpacer = SizedBox(
+    height: 8.0,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,13 +72,15 @@ class _FormScreenState extends State<FormScreen> {
                   alignment: Alignment.center,
                   width: 500,
                   height: 550,
-                  padding: const EdgeInsets.all(15),
                   child: Form(
                     key: _formKey,
                     child: ListView(
+                      padding: const EdgeInsets.all(16),
                       children: <Widget>[
                         TextFormField(
-                          decoration: InputDecoration(labelText: "CompanyID"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "CompanyID"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             mission = Missions(
@@ -85,8 +94,11 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "CoverImage"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "CoverImage"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             mission = Missions(
@@ -100,10 +112,13 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
-                        DropDownFormField(
-                          titleText: 'Difficulty',
-                          hintText: 'Please choose one',
-                          value:_level,
+                        _verticalSpacer,
+                        DropdownButtonFormField<Difficulty>(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Difficulty',
+                              hintText: 'Please choose one'),
+                          value: _level,
                           onSaved: (value) {
                             mission = Missions(
                               companyId: mission.companyId,
@@ -115,34 +130,32 @@ class _FormScreenState extends State<FormScreen> {
                               details: mission.details,
                             );
                             setState(() {
-                              _level=value;
+                              _level = value;
                             });
                           },
-                          onChanged: (value){
+                          onChanged: (value) {
                             setState(() {
-                              _level=value;
+                              _level = value;
                             });
                           },
-                          dataSource: [
-                            {
-                              "display": "Beginner",
-                              "value": Difficulty.Beginner,
-                            },
-                            {
-                              "display": "Intermediate",
-                              "value": Difficulty.Intermediate,
-                            },
-                            {
-                              "display": "Advanced",
-                              "value": Difficulty.Advanced,
-                            },
-                          ],
-                          textField: 'display',
-                          valueField: 'value',
+                          items: <String>[
+                            "Beginner",
+                            "Intermediate",
+                            "Advanced"
+                          ].map<DropdownMenuItem<Difficulty>>((String value) {
+                            return DropdownMenuItem<Difficulty>(
+                              value: value == "Beginner"
+                                  ? Difficulty.Beginner
+                                  : value == "Intermediate"
+                                      ? Difficulty.Intermediate
+                                      : Difficulty.Advanced,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
-
+                        _verticalSpacer,
                         // TextFormField(
-                        //   decoration: InputDecoration(labelText: "Difficulty"),
+                        //   decoration: InputDecoration(border: OutlineInputBorder(),labelText: "Difficulty"),
                         //   textInputAction: TextInputAction.next,
                         //   onSaved: (value) {
                         //     mission = Missions(
@@ -157,8 +170,9 @@ class _FormScreenState extends State<FormScreen> {
                         //   },
                         // ),
                         TextFormField(
-                          decoration:
-                              InputDecoration(labelText: "No of Microtasks"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "No of Microtasks"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             mission = Missions(
@@ -172,8 +186,10 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Name"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: "Name"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             mission = Missions(
@@ -187,8 +203,10 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration: InputDecoration(labelText: "Tags"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(), labelText: "Tags"),
                           textInputAction: TextInputAction.next,
                           onSaved: (value) {
                             var lt = new List<String>();
@@ -209,9 +227,11 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         TextFormField(
-                          decoration:
-                              InputDecoration(labelText: "Details Of Mission"),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Details Of Mission"),
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.multiline,
                           maxLines: 3,
@@ -227,6 +247,7 @@ class _FormScreenState extends State<FormScreen> {
                             );
                           },
                         ),
+                        _verticalSpacer,
                         // RaisedButton(
                         //   onPressed: () => _save(),
                         // ),
