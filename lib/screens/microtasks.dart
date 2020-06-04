@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forms/models/microtask.dart';
 import 'package:forms/models/providers/microtask_provider.dart';
 import 'package:forms/models/providers/mission_provider.dart';
+import 'package:forms/screens/list_microtasks.dart';
 import 'package:provider/provider.dart';
 
 class MicrotaskScreen extends StatefulWidget {
@@ -46,167 +47,174 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
               child: CircularProgressIndicator(),
             )
           : Center(
-              child: Card(
-                elevation: 10,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: 500,
-                  height: 450,
-                  child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      padding: const EdgeInsets.all(16),
-                      children: <Widget>[
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Answer"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            micro = Microtask(
-                              answer: value,
-                              detail: micro.detail,
-                              name: micro.name,
-                              //progress: micro.progress,
-                              question: micro.question,
-                              resources: micro.resources,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Details"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            micro = Microtask(
-                              answer: micro.answer,
-                              detail: value,
-                              name: micro.name,
-                              //progress: micro.progress,
-                              question: micro.question,
-                              resources: micro.resources,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(), labelText: "Name"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            micro = Microtask(
-                              answer: micro.answer,
-                              detail: micro.detail,
-                              name: value,
-                              //progress: micro.progress,
-                              question: micro.question,
-                              resources: micro.resources,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
-                        // TextFormField(
-                        //   decoration: InputDecoration(
-                        //       border: OutlineInputBorder(),
-                        //       labelText: "Progress"),
-                        //   textInputAction: TextInputAction.next,
-                        //   onSaved: (value) {
-                        //     micro = Microtask(
-                        //       answer: micro.answer,
-                        //       detail: micro.detail,
-                        //       name: micro.name,
-                        //       //progress: int.parse(value),
-                        //       question: micro.question,
-                        //       resources: micro.resources,
-                        //     );
-                        //   },
-                        // ),
-                        // _verticalSpacer,
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Question"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            micro = Microtask(
-                              answer: micro.answer,
-                              detail: micro.detail,
-                              name: micro.name,
-                              //progress: micro.progress,
-                              question: value,
-                              resources: micro.resources,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Resources"),
-                          textInputAction: TextInputAction.next,
-                          onSaved: (value) {
-                            var lt = new List<String>();
-                            final _delimiter = ',';
-                            final _values = value.split(_delimiter);
-                            //print(_values);
-                            _values.forEach((item) {
-                              lt.add(item);
-                            });
-                            micro = Microtask(
-                              answer: micro.answer,
-                              detail: micro.detail,
-                              name: micro.name,
-                              //progress: micro.progress,
-                              question: micro.question,
-                              resources: lt,
-                            );
-                          },
-                        ),
-                        _verticalSpacer,
-                        Row(
-                          children: [
-                            FlatButton(
-                              color: Theme.of(context).accentColor,
-                              child: Text(
-                                "ADD Another microtask",
-                                style: TextStyle(
-                                  //fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onPressed: () async {
-                                await _save(context, id);
-                                setState(() {
-                                  isLoading = false;
+              child: Row(
+                children: [
+                  ListMicrotasks(),
+                  Card(
+                    elevation: 10,
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 500,
+                      height: 450,
+                      child: Form(
+                        key: _formKey,
+                        child: ListView(
+                          padding: const EdgeInsets.all(16),
+                          children: <Widget>[
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Answer"),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) {
+                                micro = Microtask(
+                                  answer: value,
+                                  detail: micro.detail,
+                                  name: micro.name,
+                                  //progress: micro.progress,
+                                  question: micro.question,
+                                  resources: micro.resources,
+                                );
+                              },
+                            ),
+                            _verticalSpacer,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Details"),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) {
+                                micro = Microtask(
+                                  answer: micro.answer,
+                                  detail: value,
+                                  name: micro.name,
+                                  //progress: micro.progress,
+                                  question: micro.question,
+                                  resources: micro.resources,
+                                );
+                              },
+                            ),
+                            _verticalSpacer,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Name"),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) {
+                                micro = Microtask(
+                                  answer: micro.answer,
+                                  detail: micro.detail,
+                                  name: value,
+                                  //progress: micro.progress,
+                                  question: micro.question,
+                                  resources: micro.resources,
+                                );
+                              },
+                            ),
+                            _verticalSpacer,
+                            // TextFormField(
+                            //   decoration: InputDecoration(
+                            //       border: OutlineInputBorder(),
+                            //       labelText: "Progress"),
+                            //   textInputAction: TextInputAction.next,
+                            //   onSaved: (value) {
+                            //     micro = Microtask(
+                            //       answer: micro.answer,
+                            //       detail: micro.detail,
+                            //       name: micro.name,
+                            //       //progress: int.parse(value),
+                            //       question: micro.question,
+                            //       resources: micro.resources,
+                            //     );
+                            //   },
+                            // ),
+                            // _verticalSpacer,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Question"),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) {
+                                micro = Microtask(
+                                  answer: micro.answer,
+                                  detail: micro.detail,
+                                  name: micro.name,
+                                  //progress: micro.progress,
+                                  question: value,
+                                  resources: micro.resources,
+                                );
+                              },
+                            ),
+                            _verticalSpacer,
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: "Resources"),
+                              textInputAction: TextInputAction.next,
+                              onSaved: (value) {
+                                var lt = new List<String>();
+                                final _delimiter = ',';
+                                final _values = value.split(_delimiter);
+                                //print(_values);
+                                _values.forEach((item) {
+                                  lt.add(item);
                                 });
-                                //_formKey.currentState.reset();
+                                micro = Microtask(
+                                  answer: micro.answer,
+                                  detail: micro.detail,
+                                  name: micro.name,
+                                  //progress: micro.progress,
+                                  question: micro.question,
+                                  resources: lt,
+                                );
                               },
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            FlatButton(
-                              color: Theme.of(context).accentColor,
-                              child: Text(
-                                "DONE!!",
-                                style: TextStyle(
-                                  //fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                            _verticalSpacer,
+                            Row(
+                              children: [
+                                FlatButton(
+                                  color: Theme.of(context).accentColor,
+                                  child: Text(
+                                    "ADD Another microtask",
+                                    style: TextStyle(
+                                      //fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    await _save(context, id);
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                    //_formKey.currentState.reset();
+                                  },
                                 ),
-                              ),
-                              onPressed: () async {
-                                await _save(context, id);
-                                Navigator.of(context).pushReplacementNamed('/');
-                              },
-                            )
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                FlatButton(
+                                  color: Theme.of(context).accentColor,
+                                  child: Text(
+                                    "DONE!!",
+                                    style: TextStyle(
+                                      //fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  onPressed: () async {
+                                    await _save(context, id);
+                                    Navigator.of(context)
+                                        .pushReplacementNamed('/');
+                                  },
+                                )
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ),
     );
