@@ -20,6 +20,10 @@ class MicroTaskProvider extends ChangeNotifier {
     return (_myDocCount.length); // Count of Documents in Collection
   }
 
+  Microtask findById(String id) {
+    return _microList.firstWhere((element) => element.microtaskId == id);
+  }
+
   Future<void> fetchMicrotask(String id) async {
     _microList.clear();
     final db = Firestore.instance;
@@ -32,7 +36,7 @@ class MicroTaskProvider extends ChangeNotifier {
     _myDoc.documents.forEach((element) {
       _microList.add(Microtask.fromMap(element.data));
     });
-    print (_microList);
+    // print (_microList);
   }
 
   Future<void> createMicrotask(Microtask microtask, String id) async {
@@ -49,6 +53,15 @@ class MicroTaskProvider extends ChangeNotifier {
         .collection('microtasks')
         .document('microtask-$len')
         .setData(microtask.toMap());
+    await db
+        .collection('missions')
+        .document(id)
+        .collection('microtasks')
+        .document('microtask-$len')
+        .setData(
+      {'microtaskId': 'microtask-$len'},
+      merge: true,
+    );
     for (int i = 1; i <= len; i++) {
       await db
           .collection('missions')
@@ -60,5 +73,16 @@ class MicroTaskProvider extends ChangeNotifier {
         merge: true,
       );
     }
+  }
+
+  Future<void> updateMicrotask(
+      String id, String microId, Microtask microtask) async {
+    final db = Firestore.instance;
+    await db
+        .collection('missions')
+        .document(id)
+        .collection('microtasks')
+        .document(microId)
+        .updateData(microtask.toMap());
   }
 }

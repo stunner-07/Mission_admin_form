@@ -13,7 +13,7 @@ class ListMicrotasks extends StatelessWidget {
       elevation: 10,
       child: Container(
         width: 500,
-        height: 500,
+        height: 450,
         child: FutureBuilder(
           future: micro.fetchMicrotask(id),
           builder: (ctx, snapshot) =>
@@ -25,7 +25,7 @@ class ListMicrotasks extends StatelessWidget {
                       itemBuilder: (_, i) {
                         return Column(
                           children: <Widget>[
-                            MicrotaskItem(micro.microList[i].name),
+                            MicrotaskItem(micro.microList[i].name,i,micro.microList[i].microtaskId),
                             Divider(),
                           ],
                         );
