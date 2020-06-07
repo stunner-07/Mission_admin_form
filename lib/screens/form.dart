@@ -33,7 +33,19 @@ class _FormScreenState extends State<FormScreen> {
     });
     await Provider.of<MissionProvider>(context, listen: false)
         .createMission(mission);
-    Navigator.of(context).pushNamed(MicrotaskScreen.routeName);
+        setState(() {
+          isLoading=false;
+        });
+    Navigator.of(context).pushReplacementNamed(MicrotaskScreen.routeName);
+  }
+  Future<void> _update(BuildContext context,String missId) async {
+    _formKey.currentState.save();
+    setState(() {
+      isLoading = true;
+    });
+    await Provider.of<MissionProvider>(context, listen: false)
+        .updateMission(mission,missId);
+    Navigator.of(context).pushReplacementNamed(MicrotaskScreen.routeName);
   }
 
   @override
@@ -66,7 +78,7 @@ class _FormScreenState extends State<FormScreen> {
                 children: [
                   ListMissions(),
                   Consumer<MissionInitialValue>(builder:
-                      (BuildContext context, MissionInitialValue value, _) {
+                      (BuildContext consumerContext, MissionInitialValue value, _) {
                     var _level = value.initValue['difficulty'];
                     return Card(
                       elevation: 10,
@@ -135,14 +147,14 @@ class _FormScreenState extends State<FormScreen> {
                                     tags: mission.tags,
                                     details: mission.details,
                                   );
-                                  setState(() {
+                                  //setState(() {
                                     _level = value;
-                                  });
+                                  //});
                                 },
                                 onChanged: (value) {
-                                  setState(() {
+                                  //setState(() {
                                     _level = value;
-                                  });
+                                 // });
                                 },
                                 items: <String>[
                                   "Beginner",
@@ -266,36 +278,50 @@ class _FormScreenState extends State<FormScreen> {
                               // RaisedButton(
                               //   onPressed: () => _save(),
                               // ),
-                              FlatButton(
-                                color: Theme.of(context).accentColor,
-                                onPressed: () async {
-                                  await _save(context);
-                                  // return showDialog(
-                                  //   context: context,
-                                  //   builder: (BuildContext context) {
-                                  //     return Dialog(
-                                  //       shape: RoundedRectangleBorder(
-                                  //           borderRadius: BorderRadius.circular(20.0)),
-                                  //       child: Container(
-                                  //         width: 800,
-                                  //         height: 800,
-                                  //         child: Padding(
-                                  //           padding: const EdgeInsets.all(12.0),
-                                  //           child: MicrotaskScreen(mission.missionId),
-                                  //         ),
-                                  //       ),
-                                  //     );
-                                  //   },
-                                  // );
-                                },
-                                child: Text(
-                                  'Add Microtasks',
-                                  style: TextStyle(
-                                    //fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                              value.initValue['name'] == ''
+                                  ? FlatButton(
+                                      color: Theme.of(context).accentColor,
+                                      onPressed: () async {
+                                        await _save(context);
+                                        // return showDialog(
+                                        //   context: context,
+                                        //   builder: (BuildContext context) {
+                                        //     return Dialog(
+                                        //       shape: RoundedRectangleBorder(
+                                        //           borderRadius: BorderRadius.circular(20.0)),
+                                        //       child: Container(
+                                        //         width: 800,
+                                        //         height: 800,
+                                        //         child: Padding(
+                                        //           padding: const EdgeInsets.all(12.0),
+                                        //           child: MicrotaskScreen(mission.missionId),
+                                        //         ),
+                                        //       ),
+                                        //     );
+                                        //   },
+                                        // );
+                                      },
+                                      child: Text(
+                                        'Add Microtasks',
+                                        style: TextStyle(
+                                          //fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  : FlatButton(
+                                      color: Theme.of(context).accentColor,
+                                      onPressed: () async {
+                                        await _update(context,value.initValue['missionId']);
+                                      },
+                                      child: Text(
+                                        'Update Microtasks',
+                                        style: TextStyle(
+                                          //fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
                             ],
                           ),
                         ),

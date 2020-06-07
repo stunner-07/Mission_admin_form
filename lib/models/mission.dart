@@ -54,7 +54,6 @@ class Missions {
     else if(map['difficulty']=='l3') diff=Difficulty.Advanced;
 
     return Missions(
-      //missionId: map['missionId'],
       companyId: map['companyId'],
       coverImg: map['coverImg'],
       difficulty: diff,

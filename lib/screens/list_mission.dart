@@ -14,37 +14,39 @@ class ListMissions extends StatelessWidget {
         height: 450,
         child: FutureBuilder(
             future: mission.fetchMissions(),
-            builder: (ctx, snapshot) =>
-                snapshot.connectionState == ConnectionState.waiting
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : mission.missionList.length != 0
-                        ? ListView.builder(
-                            itemBuilder: (_, i) {
-                              return Column(
-                                children: <Widget>[
-                                  MissionItem(
-                                    mission.missionList[i].name,
-                                    i,
-                                    mission.missionList[i].missionId,
-                                  ),
-                                  Divider(),
-                                ],
-                              );
-                            },
-                            itemCount: mission.missionList.length,
-                          )
-                        : Center(
-                            child: Text(
-                              "Add Some Missions!",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                              ),
+            builder: (ctx, snapshot) {
+              print(mission.missionList.length);
+              return snapshot.connectionState == ConnectionState.waiting
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : mission.missionList.length != 0
+                      ? ListView.builder(
+                          itemBuilder: (_, i) {
+                            return Column(
+                              children: <Widget>[
+                                MissionItem(
+                                  mission.missionList[i].name,
+                                  i,
+                                  mission.missionList[i].missionId,
+                                ),
+                                Divider(),
+                              ],
+                            );
+                          },
+                          itemCount: mission.missionList.length,
+                        )
+                      : Center(
+                          child: Text(
+                            "Add Some Missions!",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
                             ),
-                          )),
+                          ),
+                        );
+            }),
       ),
     );
   }

@@ -9,6 +9,7 @@ class MissionInitialValue with ChangeNotifier {
       'name': '',
       'tags': '',
       'details': '',
+      'missionId':'',
     };
   void configureInitialValues(Missions m) {
     initValue ={
@@ -18,6 +19,7 @@ class MissionInitialValue with ChangeNotifier {
       'name': m.name,
       'tags':  m.tags.join(','),
       'details': m.details,
+      'missionId':m.missionId,
     };
     notifyListeners();
   }
@@ -30,6 +32,7 @@ class MissionInitialValue with ChangeNotifier {
       'name': '',
       'tags': '',
       'details': '',
+      'missionId':'',
     };
     notifyListeners();
   }
