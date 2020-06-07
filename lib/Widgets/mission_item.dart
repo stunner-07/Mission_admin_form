@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:forms/models/providers/initialValue.dart';
-import 'package:forms/models/providers/microtask_provider.dart';
+import 'package:forms/models/providers/initialValue_mission.dart';
+import 'package:forms/models/providers/mission_provider.dart';
 import 'package:provider/provider.dart';
 
-class MicrotaskItem extends StatelessWidget {
+class MissionItem extends StatelessWidget {
   final String name;
   final int i;
   final String id;
-  MicrotaskItem(this.name, this.i, this.id);
+  MissionItem(this.name, this.i, this.id);
   @override
   Widget build(BuildContext context) {
     return Card(
         elevation: 5,
         child: GestureDetector(
           onTap: () {
-            //print(id);
-            var micro = Provider.of<MicroTaskProvider>(context, listen: false)
+            var mission = Provider.of<MissionProvider>(context, listen: false)
                 .findById(id);
-            //print(micro.name);
-            Provider.of<InitialValue>(context, listen: false)
-                .configureInitialValues(micro);
+            Provider.of<MissionInitialValue>(context, listen: false)
+                .configureInitialValues(mission);
           },
           child: ListTile(
             leading: CircleAvatar(

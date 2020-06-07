@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forms/models/providers/initialValue.dart';
+import 'package:forms/models/providers/initialValue_mission.dart';
 import 'package:forms/models/providers/microtask_provider.dart';
 import 'package:forms/models/providers/mission_provider.dart';
 import 'package:forms/screens/form.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: InitialValue(),
+        ),
+        ChangeNotifierProvider.value(
+          value: MissionInitialValue(),
         ),
       ],
       child: MaterialApp(

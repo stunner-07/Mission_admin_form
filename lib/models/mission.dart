@@ -46,18 +46,22 @@ class Missions {
     };
   }
 
-  // static Missions fromMap(Map<String, dynamic> map) {
-  //   if (map == null) return null;
+  static Missions fromMap(Map<String, dynamic> map,String missionId) {
+    if (map == null) return null;
+    Difficulty diff;
+    if(map['difficulty']=='l1') diff=Difficulty.Beginner;
+    else if(map['difficulty']=='l2') diff=Difficulty.Intermediate;
+    else if(map['difficulty']=='l3') diff=Difficulty.Advanced;
 
-  //   return Missions(
-  //     //missionId: map['missionId'],
-  //     companyId: map['companyId'],
-  //     coverImg: map['coverImg'],
-  //     difficulty: map['difficulty'],
-  //     microtasksNos: map['microtasksNos'],
-  //     name: map['name'],
-  //     tags: List<String>.from(map['tags']),
-  //     details: map['details'],
-  //   );
-  // }
+    return Missions(
+      //missionId: map['missionId'],
+      companyId: map['companyId'],
+      coverImg: map['coverImg'],
+      difficulty: diff,
+      name: map['name'],
+      tags: List<String>.from(map['tags']),
+      missionId: missionId,
+      //details: details['details'],
+    );
+  }
 }

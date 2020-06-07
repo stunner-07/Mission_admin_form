@@ -43,10 +43,18 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
     await Provider.of<MicroTaskProvider>(context, listen: false)
         .updateMicrotask(id, microId, micro);
   }
-
   final Widget _verticalSpacer = SizedBox(
     height: 8.0,
   );
+  @override
+  void dispose() {
+    _answerController.dispose();
+    _detailsController.dispose();
+    _nameController.dispose();
+    _resourcesController.dispose();
+    _questionController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final String id = Provider.of<MissionProvider>(context, listen: false).id;
@@ -187,6 +195,10 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                   ? Row(
                                       children: [
                                         FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
                                           color: Theme.of(context).accentColor,
                                           child: Text(
                                             "ADD Another microtask",
@@ -207,6 +219,10 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                           width: 20,
                                         ),
                                         FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
                                           color: Theme.of(context).accentColor,
                                           child: Text(
                                             "DONE!!",
@@ -223,26 +239,61 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                         )
                                       ],
                                     )
-                                  : Center(
-                                    child: FlatButton(
-                                        color: Theme.of(context).accentColor,
-                                        child: Text(
-                                          "Update Microtask",
-                                          style: TextStyle(
-                                            //fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                  : Row(
+                                      children: [
+                                        FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                              width: 1,
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
                                           ),
+                                          color: Colors.white,
+                                          child: Text(
+                                            "Discard Changes",
+                                            style: TextStyle(
+                                              //fontWeight: FontWeight.bold,
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Provider.of<InitialValue>(context,
+                                                    listen: false)
+                                                .reconfigure();
+                                            //_formKey.currentState.reset();
+                                          },
                                         ),
-                                        onPressed: () async {
-                                          await _update(context, id,
-                                              value.initValue['microId']);
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-                                          //_formKey.currentState.reset();
-                                        },
-                                      ),
-                                  ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        FlatButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(5.0),
+                                          ),
+                                          color: Theme.of(context).accentColor,
+                                          child: Text(
+                                            "Update Microtask",
+                                            style: TextStyle(
+                                              //fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          onPressed: () async {
+                                            await _update(context, id,
+                                                value.initValue['microId']);
+                                            setState(() {
+                                              isLoading = false;
+                                            });
+                                            //_formKey.currentState.reset();
+                                          },
+                                        ),
+                                      ],
+                                    ),
                             ],
                           ),
                         ),

@@ -10,7 +10,7 @@ class InitialValue with ChangeNotifier {
     'resources': '',
     'microId': '',
   };
-  void configureInitialValues(String microId, Microtask micro) {
+  void configureInitialValues(Microtask micro) {
     initValue = {
       'answer': micro.answer,
       'detail': micro.detail,
