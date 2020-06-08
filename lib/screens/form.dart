@@ -27,24 +27,33 @@ class _FormScreenState extends State<FormScreen> {
   final _detailsController = TextEditingController();
 
   Future<void> _save(BuildContext context) async {
+    final _isVaild = _formKey.currentState.validate();
+    if (!_isVaild) {
+      return;
+    }
     _formKey.currentState.save();
     setState(() {
       isLoading = true;
     });
     await Provider.of<MissionProvider>(context, listen: false)
         .createMission(mission);
-        setState(() {
-          isLoading=false;
-        });
+    setState(() {
+      isLoading = false;
+    });
     Navigator.of(context).pushReplacementNamed(MicrotaskScreen.routeName);
   }
-  Future<void> _update(BuildContext context,String missId) async {
+
+  Future<void> _update(BuildContext context, String missId) async {
+    final _isVaild = _formKey.currentState.validate();
+    if (!_isVaild) {
+      return;
+    }
     _formKey.currentState.save();
     setState(() {
       isLoading = true;
     });
     await Provider.of<MissionProvider>(context, listen: false)
-        .updateMission(mission,missId);
+        .updateMission(mission, missId);
     Navigator.of(context).pushReplacementNamed(MicrotaskScreen.routeName);
   }
 
@@ -78,7 +87,8 @@ class _FormScreenState extends State<FormScreen> {
                 children: [
                   ListMissions(),
                   Consumer<MissionInitialValue>(builder:
-                      (BuildContext consumerContext, MissionInitialValue value, _) {
+                      (BuildContext consumerContext, MissionInitialValue value,
+                          _) {
                     var _level = value.initValue['difficulty'];
                     return Card(
                       elevation: 10,
@@ -112,6 +122,16 @@ class _FormScreenState extends State<FormScreen> {
                               ),
                               _verticalSpacer,
                               TextFormField(
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Enter the ImageURL';
+                                  }
+                                  if (!value.startsWith('http') &&
+                                      !value.startsWith('https')) {
+                                    return 'Enter valid Url';
+                                  }
+                                  return null;
+                                },
                                 controller: _coverImgController
                                   ..text = (value.initValue['coverImg']),
                                 decoration: InputDecoration(
@@ -148,13 +168,13 @@ class _FormScreenState extends State<FormScreen> {
                                     details: mission.details,
                                   );
                                   //setState(() {
-                                    _level = value;
+                                  _level = value;
                                   //});
                                 },
                                 onChanged: (value) {
                                   //setState(() {
-                                    _level = value;
-                                 // });
+                                  _level = value;
+                                  // });
                                 },
                                 items: <String>[
                                   "Beginner",
@@ -312,7 +332,8 @@ class _FormScreenState extends State<FormScreen> {
                                   : FlatButton(
                                       color: Theme.of(context).accentColor,
                                       onPressed: () async {
-                                        await _update(context,value.initValue['missionId']);
+                                        await _update(context,
+                                            value.initValue['missionId']);
                                       },
                                       child: Text(
                                         'Update Microtasks',
