@@ -46,7 +46,7 @@ class Missions {
     };
   }
 
-  static Missions fromMap(Map<String, dynamic> map,String missionId) {
+  static Missions fromMap(Map<String, dynamic> map,String missionId,) {
     if (map == null) return null;
     Difficulty diff;
     if(map['difficulty']=='l1') diff=Difficulty.Beginner;
@@ -60,7 +60,7 @@ class Missions {
       name: map['name'],
       tags: List<String>.from(map['tags']),
       missionId: missionId,
-      //details: details['details'],
+      //details: det,
     );
   }
 }

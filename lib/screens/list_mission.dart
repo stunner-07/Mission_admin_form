@@ -15,7 +15,7 @@ class ListMissions extends StatelessWidget {
         child: FutureBuilder(
             future: mission.fetchMissions(),
             builder: (ctx, snapshot) {
-              print(mission.missionList.length);
+              //print(mission.missionList.length);
               return snapshot.connectionState == ConnectionState.waiting
                   ? Center(
                       child: CircularProgressIndicator(),

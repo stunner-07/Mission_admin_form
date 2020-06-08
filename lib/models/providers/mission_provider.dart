@@ -19,7 +19,7 @@ class MissionProvider extends ChangeNotifier {
     missions.missionId = response.documentID;
     id = missions.missionId;
     notifyListeners();
-    addDetail(missions, db);
+    await addDetail(missions, db);
   }
 
   Future<void> updateMission(Missions missions, String missionId) async {
@@ -28,7 +28,7 @@ class MissionProvider extends ChangeNotifier {
         .collection('missions')
         .document(missionId)
         .setData(missions.toMap());
-    updateDetail(missions, db, missionId);
+    await updateDetail(missions, db, missionId);
     id = missionId;
     notifyListeners();
   }
@@ -38,18 +38,26 @@ class MissionProvider extends ChangeNotifier {
     final db = Firestore.instance;
     QuerySnapshot _myDoc = await db.collection('missions').getDocuments();
     _myDoc.documents.forEach((element) async {
-      // var detail = await db
-      //     .collection('missions')
-      //     .document(element.documentID)
-      //     .collection('details')
-      //     .document('details')
-      //     .get();
       _missionList
           .add(Missions.fromMap(element.data, element.documentID));
     });
+    _myDoc.documents.forEach((element) async{
+       String det=await fetchDetail(element.documentID);
+       Missions mi=_missionList.firstWhere((m) => m.missionId==element.documentID);
+       mi.details=det;
+    });
     //print(_missionList.length);
   }
-
+  Future<String> fetchDetail(String missId) async {
+    final db=Firestore.instance;
+    var det= await db
+        .collection('missions')
+        .document(missId)
+        .collection('details')
+        .document('details')
+        .get();
+    return det.data['details'];
+  }
   Future<void> updateDetail(Missions missions, Firestore db, String id) async {
     await db
         .collection('missions')
