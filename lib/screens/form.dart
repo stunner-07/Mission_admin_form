@@ -54,7 +54,6 @@ class _FormScreenState extends State<FormScreen> {
     });
     await Provider.of<MissionProvider>(context, listen: false)
         .updateMission(mission, missId);
-    Navigator.of(context).pushReplacementNamed(MicrotaskScreen.routeName);
   }
 
   @override
@@ -329,18 +328,122 @@ class _FormScreenState extends State<FormScreen> {
                                         ),
                                       ),
                                     )
-                                  : FlatButton(
-                                      color: Theme.of(context).accentColor,
-                                      onPressed: () async {
-                                        await _update(context,
-                                            value.initValue['missionId']);
-                                      },
-                                      child: Text(
-                                        'Update Microtasks',
-                                        style: TextStyle(
-                                          //fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
+                                  : Container(
+                                      width: 450,
+                                      height: 35,
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          FlatButton(
+                                            color: Colors.white,
+                                            onPressed: () async {
+                                              return showDialog(
+                                                  context: context,
+                                                  builder: (ctx) => AlertDialog(
+                                                        title: Text(
+                                                            'Are You sure'),
+                                                        content: Text(
+                                                          "Your want to discard these changes?",
+                                                        ),
+                                                        actions: <Widget>[
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Provider.of<MissionInitialValue>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .reconfigure();
+                                                              Navigator.of(ctx)
+                                                                  .pop();
+                                                            },
+                                                            child: Text("Yes"),
+                                                          ),
+                                                          FlatButton(
+                                                            onPressed: () {
+                                                              Navigator.of(ctx)
+                                                                  .pop();
+                                                            },
+                                                            child: Text("No"),
+                                                          ),
+                                                        ],
+                                                      ));
+                                            },
+                                            shape: RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                width: 1,
+                                                color: Theme.of(context)
+                                                    .accentColor,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                            ),
+                                            child: Text(
+                                              'Discard Changes',
+                                              style: TextStyle(
+                                                //fontWeight: FontWeight.bold,
+                                                color: Theme.of(context)
+                                                    .accentColor,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          FlatButton(
+                                            color:
+                                                Theme.of(context).accentColor,
+                                            onPressed: () async {
+                                              await _update(context,
+                                                  value.initValue['missionId']);
+                                              Provider.of<MissionInitialValue>(
+                                                      context,
+                                                      listen: false)
+                                                  .reconfigure();
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                            },
+                                            shape: RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                width: 1,
+                                                // color:
+                                                //     Theme.of(context).accentColor,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(5.0),
+                                            ),
+                                            child: Text(
+                                              'Save Changes',
+                                              style: TextStyle(
+                                                //fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 40,
+                                          ),
+                                          FlatButton(
+                                            color:
+                                                Theme.of(context).accentColor,
+                                            onPressed: () async {
+                                              await _update(context,
+                                                  value.initValue['missionId']);
+                                              Navigator.of(context)
+                                                  .pushReplacementNamed(
+                                                      MicrotaskScreen
+                                                          .routeName);
+                                            },
+                                            child: Text(
+                                              'Update Microtasks',
+                                              style: TextStyle(
+                                                //fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     )
                             ],

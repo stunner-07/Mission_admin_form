@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forms/models/microtask.dart';
 import 'package:forms/models/providers/initialValue.dart';
+import 'package:forms/models/providers/initialValue_mission.dart';
 import 'package:forms/models/providers/microtask_provider.dart';
 import 'package:forms/models/providers/mission_provider.dart';
 import 'package:forms/screens/list_microtasks.dart';
@@ -43,6 +44,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
     await Provider.of<MicroTaskProvider>(context, listen: false)
         .updateMicrotask(id, microId, micro);
   }
+
   final Widget _verticalSpacer = SizedBox(
     height: 8.0,
   );
@@ -55,6 +57,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
     _questionController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final String id = Provider.of<MissionProvider>(context, listen: false).id;
@@ -71,8 +74,8 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ListMicrotasks(),
-                  Consumer<InitialValue>(
-                      builder: (BuildContext consumerContext, InitialValue value, _) {
+                  Consumer<InitialValue>(builder:
+                      (BuildContext consumerContext, InitialValue value, _) {
                     //print(value.initValue['answer']);
                     return Card(
                       elevation: 10,
@@ -201,7 +204,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                           ),
                                           color: Theme.of(context).accentColor,
                                           child: Text(
-                                            "ADD This microtask",
+                                            "Save",
                                             style: TextStyle(
                                               //fontWeight: FontWeight.bold,
                                               color: Colors.white,
@@ -225,7 +228,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                           ),
                                           color: Theme.of(context).accentColor,
                                           child: Text(
-                                            "DONE!!",
+                                            "Exit",
                                             style: TextStyle(
                                               //fontWeight: FontWeight.bold,
                                               color: Colors.white,
@@ -233,6 +236,10 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                           ),
                                           onPressed: () async {
                                             //await _save(context, id);
+                                            Provider.of<MissionInitialValue>(
+                                                    context,
+                                                    listen: false)
+                                                .reconfigure();
                                             Navigator.of(context)
                                                 .pushReplacementNamed('/');
                                           },
@@ -261,9 +268,37 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                             ),
                                           ),
                                           onPressed: () {
-                                            Provider.of<InitialValue>(context,
-                                                    listen: false)
-                                                .reconfigure();
+                                            return showDialog(
+                                                context: context,
+                                                builder: (ctx) => AlertDialog(
+                                                      title:
+                                                          Text('Are You sure'),
+                                                      content: Text(
+                                                        "Your want to discard these changes?",
+                                                      ),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Provider.of<InitialValue>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .reconfigure();
+                                                            Navigator.of(ctx)
+                                                                .pop();
+                                                          },
+                                                          child: Text("Yes"),
+                                                        ),
+                                                        FlatButton(
+                                                          onPressed: () {
+                                                            Navigator.of(ctx)
+                                                                .pop();
+                                                          },
+                                                          child: Text("No"),
+                                                        ),
+                                                      ],
+                                                    ));
+
                                             //_formKey.currentState.reset();
                                           },
                                         ),
@@ -277,7 +312,7 @@ class _MicrotaskScreenState extends State<MicrotaskScreen> {
                                           ),
                                           color: Theme.of(context).accentColor,
                                           child: Text(
-                                            "Update Microtask",
+                                            "Update",
                                             style: TextStyle(
                                               //fontWeight: FontWeight.bold,
                                               color: Colors.white,
