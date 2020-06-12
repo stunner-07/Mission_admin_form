@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Widhya',
         theme: ThemeData(
-          primaryColor: Color(0xff8921aa),
-          accentColor: Color(0xff8921aa),
+          primaryColor: Colors.grey,
+          accentColor: Colors.green,
         ),
         home: FormScreen(),
         routes: {

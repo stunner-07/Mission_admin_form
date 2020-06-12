@@ -8,10 +8,14 @@ class ListMissions extends StatelessWidget {
   Widget build(BuildContext context) {
     var mission = Provider.of<MissionProvider>(context);
     return Card(
-      elevation: 10,
+      // shape: RoundedRectangleBorder(
+      //   side: BorderSide(color: Color.fromRGBO(63, 63, 62, 1), width: 1),
+      // ),
+      elevation: 8,
       child: Container(
-        width: 500,
-        height: 450,
+        color: Color.fromRGBO(251, 244, 249, 1),
+        width: 450,
+        height: 550,
         child: FutureBuilder(
             future: mission.fetchMissions(),
             builder: (ctx, snapshot) {
@@ -25,12 +29,39 @@ class ListMissions extends StatelessWidget {
                           itemBuilder: (_, i) {
                             return Column(
                               children: <Widget>[
+                                if (i == 0)
+                                  Container(
+                                    //alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.only(
+                                      left: 20,
+                                      top: 30,
+                                      bottom: 10,
+                                      right: 20,
+                                    ),
+                                    child: Text(
+                                      'List of Missions',
+                                      style: TextStyle(
+                                        fontSize: 36,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black87,
+                                      ),
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                if (i == 0)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, right: 20, bottom: 30),
+                                    child: Divider(
+                                      thickness: 0.3,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                 MissionItem(
                                   mission.missionList[i].name,
                                   i,
                                   mission.missionList[i].missionId,
                                 ),
-                                Divider(),
                               ],
                             );
                           },
